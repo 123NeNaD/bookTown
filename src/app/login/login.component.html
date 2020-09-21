@@ -1,54 +1,37 @@
-<html>
+<mat-toolbar class="background-primary text-floral-white" color="primary" color="primary">
+  Login
+  <span class="flex-spacer"></span>
+  <button mat-button mat-dialog-close>&times;</button>
+</mat-toolbar>
 
-<body>
-
-  <div [ngStyle]="{backgroundImage:'url(./assets/images/background.jpg)'}" style="width:100; height:100%; z-index:-1;">
-
-    <div class="center">
-      <mat-toolbar class="background-primary text-floral-white" color="primary">
-        Welcome to BookTown
-      </mat-toolbar>
-
-      <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
-
-        <div>
-          <mat-form-field appearance="outline" style="position: relative; bottom:5px; float: left; margin:18px;">
-            <mat-label>Enter your username</mat-label>
-            <input matInput #username="ngModel" width="10%" required placeholder="Username" type="text"
-              [(ngModel)]="user.username" name="username">
-            <mat-error *ngIf="username.errors?.required">Username is required</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline" style="position: relative; bottom:5px; float: right; margin:18px;">
-            <mat-label>Enter your password</mat-label>
-            <input matInput #password="ngModel" required placeholder="Password" type="password"
-              [(ngModel)]="user.password" name="password" [type]="hide?'password':'text'">
-            <button mat-icon-button style="display: contents;" matSuffix (click)="hide = !hide"
-              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
-          </mat-form-field>
-        </div>
-        <div>
-          <button mat-raised-button type="submit" class="background-primary text-floral-white"
-            [disabled]="loginForm.form.invalid"
-            style="width:20%; height:35px; font-size:20px; position:relative; bottom:40px; margin:18px;"
-            color="primary">Login</button>
-          <a style="position:relative; bottom:35px; right:8px; font-size:13px;" href="/">Forgot your password?</a>
-        </div>
-        <mat-divider style="position:relative; bottom:45px;"></mat-divider>
-      </form>
-      <div>
-        <button mat-raised-button class="background-primary text-floral-white"
-          style=" height:39px; font-size:20px; position:relative; bottom:35px; margin:18px;" color="primary">Create a
-          new account</button>
-        <a style="position:relative; bottom:27px; right:10px; font-size:13px;" routerLink="/home"
-          routerLinkActive="active">Continue as guest</a>
-      </div>
-
+<form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
+  <p></p>
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" style="position: relative; float: left;">
+      <mat-label>Enter your username</mat-label>
+      <input matInput #username="ngModel" required placeholder="Username" type="text" [(ngModel)]="user.username"
+        name="username">
+      <mat-error *ngIf="username.errors?.required">Username is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="position: relative; float: right;">
+      <mat-label>Enter your password</mat-label>
+      <input matInput #password="ngModel" required placeholder="Password" type="password" [(ngModel)]="user.password"
+        name="password" [type]="hide?'password':'text'">
+      <button mat-icon-button style="display: contents;" matSuffix (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <div>
+      <a style="position:relative; bottom:13px; right:11px; font-size:13px;" href="#">Forgot your password?</a><br>
+      <a style="position:relative; bottom:13px; left:72px; font-size:13px;" routerLink="/register"
+        routerLinkActive="active">Register</a>
     </div>
-
-  </div>
-</body>
-
-</html>
+    <button mat-button type="submit" style="position:relative; bottom:12px; width:22%; font-size:15px;"
+      class="background-primary text-floral-white" [disabled]="loginForm.form.invalid">Login</button>
+  </mat-dialog-actions>
+</form>

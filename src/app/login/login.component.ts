@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  private authService: AuthService;
+  constructor(public dialogRef: MatDialogRef<LoginComponent>) { }
 
   ngOnInit(): void {
   }
@@ -18,9 +21,22 @@ export class LoginComponent implements OnInit {
     username: '',
     password: ''
   };
+  errMess: string;
 
   onSubmit() {
-    console.log('CAOACOACOACO');
+    console.log('User: ', this.user);
+    this.authService.logIn(this.user)
+      .subscribe(res => {
+        if (res.success) {
+          this.dialogRef.close(res.success);
+        } else {
+          console.log(res);
+        }
+      },
+        error => {
+          console.log(error);
+          this.errMess = error;
+        });
   }
 
 }
